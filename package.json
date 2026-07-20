@@ -1,0 +1,27 @@
+{
+  "name": "axa-xyz-ezine",
+  "version": "2.1.0",
+  "description": "Portal Berita Internal Axa Xyz E-Zine SEO Optimized & Web Routing",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "ezine",
+    "portal berita",
+    "kampus",
+    "korporat",
+    "seo optimized",
+    "glassmorphism",
+    "spa routing"
+  ],
+  "author": "Axa Xyz",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}

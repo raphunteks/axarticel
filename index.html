@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#00ffaa">
+  
+  <!-- DYNAMIC SEO & CANONICAL (UPGRADE URL) -->
+  <title>Axa Xyz E-Zine | Portal Berita Internal</title>
+  <meta name="description" content="Portal berita kampus dan korporat internal terbaru. Informasi inovasi, teknologi, dan event terkini.">
+  <meta name="keywords" content="portal berita, ezine, axa xyz, kampus, korporat, artikel seo">
+  <meta name="author" content="Axa Xyz">
+  <link rel="canonical" id="canonicalUrl" href="https://axaartikel.vercel.app/">
+
+  <!-- FAVICON UPGRADE -->
+  <link rel="icon" type="image/png" href="/axalogo.png">
+  <link rel="apple-touch-icon" href="/axalogo.png">
+  <link rel="shortcut icon" href="/axalogo.png">
+
+  <!-- OPEN GRAPH (FACEBOOK/LINKEDIN) -->
+  <meta property="og:title" id="ogTitle" content="Axa Xyz E-Zine | Portal Berita Internal">
+  <meta property="og:description" id="ogDesc" content="Portal berita kampus dan korporat internal terbaru.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" id="ogUrl" content="https://axaartikel.vercel.app/">
+  <meta property="og:image" id="ogImage" content="https://axaartikel.vercel.app/axalogo.png">
+
+  <!-- TWITTER CARDS -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" id="twTitle" content="Axa Xyz E-Zine">
+  <meta name="twitter:description" id="twDesc" content="Portal berita kampus dan korporat internal terbaru.">
+  <meta name="twitter:image" id="twImage" content="https://axaartikel.vercel.app/axalogo.png">
+
+  <!-- Tailwind CSS & Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Sitelinks Search Box Schema (UPGRADE URL) -->
+  <script type="application/ld+json" id="website-schema">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Axa Xyz E-Zine",
+      "url": "https://axaartikel.vercel.app/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://axaartikel.vercel.app/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+
+  <style>
+    /* AXA XYZ THEME - DARK MODE & NEON GREEN */
+    :root {
+      --bg-dark: #0b0f19;
+      --bg-card: #151b26;
+      --neon-green: #00ffaa;
+      --neon-glow: rgba(0, 255, 170, 0.4);
+      --text-main: #f3f4f6;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* CSS3 Glassmorphism Header */
+    .glass-header {
+      background: rgba(11, 15, 25, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 255, 170, 0.15);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Glowing Text Effect */
+    .glow-text {
+      text-shadow: 0 0 10px var(--neon-glow);
+    }
+
+    /* Asymmetrical Grid */
+    .grid-zine {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    @media (min-width: 768px) {
+      .grid-zine .zine-card:first-child { grid-column: span 2; grid-row: span 2; }
+      .grid-zine .zine-card:first-child .card-img { height: 100%; min-height: 420px; }
+      .grid-zine .zine-card:first-child .card-title { font-size: 2rem; line-height: 1.2; }
+    }
+
+    /* Card & Hover Animasi CSS3 */
+    .zine-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      flex-direction: column;
+    }
+    .zine-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px -5px rgba(0, 255, 170, 0.2);
+      border-color: rgba(0, 255, 170, 0.4);
+    }
+    .img-wrapper { overflow: hidden; position: relative; }
+    .card-img {
+      width: 100%; height: 220px; object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .zine-card:hover .card-img { transform: scale(1.1); filter: brightness(1.1); }
+
+    /* Kategori Badge */
+    .badge-category {
+      background: rgba(0, 255, 170, 0.05);
+      color: var(--neon-green);
+      border: 1px solid rgba(0, 255, 170, 0.2);
+      padding: 6px 16px;
+      border-radius: 24px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .badge-category.active, .badge-category:hover {
+      background: var(--neon-green);
+      color: var(--bg-dark);
+      box-shadow: 0 0 15px var(--neon-glow);
+    }
+
+    /* Modal Article (Smooth Transition) */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(11, 15, 25, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 50; display: none; opacity: 0;
+      transition: opacity 0.4s ease;
+      overflow-y: auto;
+    }
+    .modal-overlay.active { display: block; opacity: 1; }
+    .modal-content {
+      background: var(--bg-card);
+      max-width: 800px;
+      margin: 40px auto;
+      border-radius: 24px;
+      border: 1px solid rgba(0, 255, 170, 0.2);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      transform: translateY(40px) scale(0.95);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+    }
+    .modal-overlay.active .modal-content {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    .article-text {
+      font-family: 'Merriweather', serif; line-height: 1.8; color: #d1d5db;
+    }
+
+    /* Loaders & FAB */
+    .loader-ring {
+      border: 3px solid rgba(255,255,255,0.05);
+      border-top-color: var(--neon-green);
+      border-radius: 50%; width: 40px; height: 40px;
+      animation: spin 1s linear infinite; margin: 30px auto;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    .fab-btn {
+      position: fixed; bottom: 24px; right: 24px;
+      background: var(--neon-green); color: var(--bg-dark);
+      width: 50px; height: 50px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px var(--neon-glow);
+      cursor: pointer; opacity: 0; pointer-events: none;
+      transition: all 0.3s ease; z-index: 40;
+    }
+    .fab-btn.visible { opacity: 1; pointer-events: auto; }
+    .fab-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 25px var(--neon-glow); }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="glass-header sticky top-0 z-40 py-4 px-6 flex justify-between items-center">
+    <div class="flex items-center gap-3 cursor-pointer" onclick="closeModalAndGoHome()">
+      <!-- Menggunakan Favicon Logo di Header -->
+      <img src="/axalogo.png" alt="Logo Axa Xyz" class="w-8 h-8 object-contain drop-shadow-[0_0_8px_rgba(0,255,170,0.5)]" onerror="this.style.display='none'; document.getElementById('altIcon').style.display='block';">
+      <i id="altIcon" class="ph ph-hexagon text-3xl text-[#00ffaa]" style="display:none;"></i>
+      <h1 class="text-xl font-bold tracking-tight glow-text">Axa <span class="text-[#00ffaa]">Xyz</span></h1>
+    </div>
+    
+    <div class="relative hidden md:block w-64">
+      <i class="ph ph-magnifying-glass absolute left-3 top-2.5 text-gray-400"></i>
+      <input type="text" id="searchInput" placeholder="Cari artikel..." 
+             class="w-full bg-[#151b26] border border-gray-700 rounded-full py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-[#00ffaa] transition">
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <!-- Filter -->
+    <div class="flex flex-wrap gap-3 mb-8" id="categoryContainer">
+      <button class="badge-category active" onclick="filterCategory('All', this)">Semua</button>
+      <button class="badge-category" onclick="filterCategory('Teknologi', this)">Teknologi</button>
+      <button class="badge-category" onclick="filterCategory('Edukasi', this)">Edukasi</button>
+      <button class="badge-category" onclick="filterCategory('Event', this)">Event</button>
+      <button class="badge-category" onclick="filterCategory('Bisnis', this)">Bisnis</button>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid-zine" id="articleGrid"></div>
+    <div id="scrollLoader" class="hidden"><div class="loader-ring"></div></div>
+  </main>
+
+  <!-- Modal View -->
+  <div id="articleModal" class="modal-overlay">
+    <div class="modal-content relative pb-8">
+      <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 p-2 rounded-full text-white hover:bg-[#00ffaa] hover:text-black transition z-10 backdrop-blur-sm">
+        <i class="ph ph-x text-xl"></i>
+      </button>
+      
+      <div id="modalImgWrapper" class="w-full h-64 md:h-96 bg-gray-900 relative"></div>
+
+      <div class="px-6 md:px-10 mt-6">
+        <div id="modalMeta" class="flex items-center gap-4 text-sm text-gray-400 mb-3"></div>
+        <h2 id="modalTitle" class="text-3xl font-bold mb-6 text-white leading-tight"></h2>
+        
+        <div class="flex gap-4 mb-8 border-b border-gray-800 pb-4">
+          <button id="btnLike" onclick="likeArticle()" class="flex items-center gap-2 text-gray-400 hover:text-[#00ffaa] transition">
+            <i class="ph ph-heart text-xl" id="iconLike"></i>
+            <span id="txtLikeCount">0</span>
+          </button>
+          <button onclick="shareArticle()" class="flex items-center gap-2 text-gray-400 hover:text-[#00ffaa] transition">
+            <i class="ph ph-share-network text-xl"></i> Bagikan
+          </button>
+        </div>
+
+        <div id="modalContent" class="article-text text-lg"></div>
+      </div>
+    </div>
+  </div>
+
+  <button id="fabBtn" class="fab-btn" onclick="scrollToTop()"><i class="ph ph-arrow-up text-xl"></i></button>
+
+  <script>
+    // --- LINK GOOGLE APPS SCRIPT API UPGRADE (VERCEL READY) ---
+    const GAS_URL = "https://script.google.com/macros/s/AKfycby2bMZ4Uk1ysSsBZOMQ91-o5_JSfsYU3wr1-xO17x1DlhdjgXCtVaWmuSyqIzC4a68/exec";
+
+    var appState = {
+      articles: [], page: 1, limit: 6, category: 'All', 
+      hasMore: true, isLoading: false, currentViewId: null,
+      initialLoadDone: false 
+    };
+
+    var mockData = [
+      { ID_Berita: "B1", Slug_URL: "inovasi-ai-kampus", Judul: "Inovasi AI di Lingkungan Kampus", Kategori: "Teknologi", Penulis: "Alan Turing", Gambar_URL: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800", Konten_HTML: "<p>AI kini menjadi asisten utama mahasiswa dalam menyusun riset...</p>", Tgl_Rilis: "2026-07-20", Waktu_Baca: "3 min read", Jumlah_View: "150", Jumlah_Like: "20", Meta_Desc: "AI di kampus." },
+      { ID_Berita: "B2", Slug_URL: "juara-robotik-nasional", Judul: "Tim Robotik Sabet Juara 1", Kategori: "Teknologi", Penulis: "Siti", Gambar_URL: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800", Konten_HTML: "<p>Kemenangan gemilang dari tim robotik kampus...</p>", Tgl_Rilis: "2026-07-19", Waktu_Baca: "2 min read", Jumlah_View: "80", Jumlah_Like: "12", Meta_Desc: "Juara robotik." }
+    ];
+
+    window.onload = function() {
+      loadArticles(true);
+      setupScrollListener();
+      setupSearchListener();
+    };
+
+    // HISTORY API EVENT
+    window.addEventListener('popstate', function(event) {
+      checkUrlRouting(true);
+    });
+
+    function checkUrlRouting(isPopState = false) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const articleIdOrSlug = urlParams.get('article');
+      
+      if (articleIdOrSlug) {
+        var found = appState.articles.find(function(a) { 
+          return a.ID_Berita === articleIdOrSlug || a.Slug_URL === articleIdOrSlug; 
+        });
+        
+        if (found) {
+          openModal(found.ID_Berita, true); 
+        }
+      } else if (isPopState && appState.currentViewId) {
+        closeModal(true); 
+      }
+    }
+
+    // --- SUPER BIG UPGRADE FETCH API (MENGGANTIKAN GOOGLE.SCRIPT.RUN) ---
+    function loadArticles(isReset) {
+      if (appState.isLoading || (!appState.hasMore && !isReset)) return;
+      appState.isLoading = true;
+      document.getElementById('scrollLoader').style.display = 'block';
+
+      if (isReset) {
+        appState.page = 1; appState.articles = [];
+        document.getElementById('articleGrid').innerHTML = '';
+      }
+
+      var fetchUrl = GAS_URL + "?action=getArticles&page=" + appState.page + "&limit=" + appState.limit + "&category=" + encodeURIComponent(appState.category);
+
+      fetch(fetchUrl)
+        .then(function(response) {
+          if (!response.ok) throw new Error("Gagal menyambung ke GAS API.");
+          return response.json();
+        })
+        .then(function(res) {
+          // Jika GAS me-return JSON berupa string
+          var parsedData = typeof res === 'string' ? JSON.parse(res) : res;
+          processNewData(parsedData.data, parsedData.hasMore);
+        })
+        .catch(function(err) {
+          console.warn("API Backend GAS Error atau Belum Diatur (doGet). Fallback ke Mock Data...", err);
+          appState.isLoading = false;
+          document.getElementById('scrollLoader').style.display = 'none';
+          
+          setTimeout(function() {
+            var filtered = mockData.filter(function(i) { return appState.category === 'All' || i.Kategori === appState.category; });
+            processNewData(filtered, false);
+          }, 600);
+        });
+    }
+
+    function processNewData(newData, hasMore) {
+      appState.articles = appState.articles.concat(newData);
+      appState.hasMore = hasMore; appState.page++; appState.isLoading = false;
+      document.getElementById('scrollLoader').style.display = 'none';
+      renderArticles(newData);
+
+      if (!appState.initialLoadDone) {
+        appState.initialLoadDone = true;
+        checkUrlRouting(); 
+      }
+    }
+
+    function renderArticles(data) {
+      var grid = document.getElementById('articleGrid');
+      var html = "";
+      for (var i = 0; i < data.length; i++) {
+        var item = data[i];
+        var id = String(item.ID_Berita);
+        var img = String(item.Gambar_URL);
+        var cat = String(item.Kategori);
+        var title = String(item.Judul);
+        
+        html += '<div class="zine-card cursor-pointer group" onclick="openModal(\'' + id + '\')">';
+        html +=   '<div class="img-wrapper">';
+        html +=     '<img src="' + img + '" class="card-img" alt="' + title + '">';
+        html +=     '<div class="absolute top-3 left-3 bg-[#0b0f19]/80 text-[#00ffaa] text-xs px-3 py-1 rounded-full border border-[#00ffaa]/30 backdrop-blur-sm uppercase font-bold tracking-wider">' + cat + '</div>';
+        html +=   '</div>';
+        html +=   '<div class="p-5 flex-1 flex flex-col justify-between">';
+        html +=     '<h3 class="card-title text-lg font-bold text-white mb-3 line-clamp-3 group-hover:text-[#00ffaa] transition">' + title + '</h3>';
+        html +=     '<div class="flex justify-between items-center text-xs text-gray-400 mt-auto border-t border-gray-800 pt-3">';
+        html +=       '<span class="flex items-center gap-1"><i class="ph ph-clock"></i> ' + String(item.Waktu_Baca) + '</span>';
+        html +=       '<span class="flex items-center gap-1"><i class="ph ph-eye"></i> <span id="viewCount-' + id + '">' + String(item.Jumlah_View) + '</span></span>';
+        html +=     '</div></div></div>';
+      }
+      grid.innerHTML += html;
+    }
+
+    function setupSearchListener() {
+      var input = document.getElementById('searchInput');
+      input.addEventListener('keyup', function(e) {
+        var term = e.target.value.toLowerCase();
+        var cards = document.querySelectorAll('.zine-card');
+        cards.forEach(function(card) {
+          card.style.display = card.querySelector('.card-title').innerText.toLowerCase().indexOf(term) > -1 ? 'flex' : 'none';
+        });
+      });
+    }
+
+    function setupScrollListener() {
+      window.addEventListener('scroll', function() {
+        var fab = document.getElementById('fabBtn');
+        window.scrollY > 300 ? fab.classList.add('visible') : fab.classList.remove('visible');
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) loadArticles(false);
+      });
+    }
+
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+    function filterCategory(cat, btnElement) {
+      document.querySelectorAll('.badge-category').forEach(function(b) { b.classList.remove('active'); });
+      btnElement.classList.add('active');
+      appState.category = cat; loadArticles(true);
+    }
+
+    // --- UPGRADE ROUTING & SEO INJECTION ---
+    function openModal(id, skipPushState = false) {
+      appState.currentViewId = id;
+      var article = appState.articles.find(function(a) { return a.ID_Berita === id; });
+      if (!article) return;
+
+      if (!skipPushState) {
+        var routingUrl = '?article=' + (article.Slug_URL || id);
+        window.history.pushState({ id: id }, article.Judul, routingUrl);
+      }
+
+      document.getElementById('modalImgWrapper').innerHTML = '<img src="' + article.Gambar_URL + '" class="w-full h-full object-cover opacity-50 mix-blend-screen"><div class="absolute inset-0 bg-gradient-to-t from-[#151b26] via-[#151b26]/50 to-transparent"></div>';
+      document.getElementById('modalMeta').innerHTML = '<span class="text-[#00ffaa] font-bold uppercase tracking-wider">' + article.Kategori + '</span> &bull; <span>Oleh ' + article.Penulis + '</span> &bull; <span>' + article.Tgl_Rilis.split(" ")[0] + '</span>';
+      document.getElementById('modalTitle').innerText = article.Judul;
+      document.getElementById('modalContent').innerHTML = article.Konten_HTML;
+      document.getElementById('txtLikeCount').innerText = article.Jumlah_Like;
+      
+      var iconLike = document.getElementById('iconLike');
+      iconLike.classList.remove('ph-fill', 'text-red-500'); iconLike.classList.add('ph-heart');
+
+      var modal = document.getElementById('articleModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      var currentView = parseInt(article.Jumlah_View) || 0;
+      article.Jumlah_View = currentView + 1;
+      var gridBadge = document.getElementById('viewCount-' + id);
+      if (gridBadge) gridBadge.innerText = article.Jumlah_View;
+      
+      // SYNC BACKEND VIEW VIA FETCH API (Mode No-Cors agar silent & cepat)
+      fetch(GAS_URL + "?action=incrementView&id=" + id, { method: 'POST', mode: 'no-cors' })
+        .catch(function(e) { console.log(e); });
+
+      // 4. BIG SEO UPGRADE (Menggunakan Domain AXA)
+      const currentUrl = window.location.href;
+      document.title = article.Judul + " | Axa Xyz";
+      document.querySelector('meta[name="description"]').setAttribute("content", article.Meta_Desc);
+      
+      document.getElementById('canonicalUrl').setAttribute("href", currentUrl);
+      document.getElementById('ogTitle').setAttribute("content", article.Judul);
+      document.getElementById('ogDesc').setAttribute("content", article.Meta_Desc);
+      document.getElementById('ogUrl').setAttribute("content", currentUrl);
+      document.getElementById('ogImage').setAttribute("content", article.Gambar_URL);
+      
+      document.getElementById('twTitle').setAttribute("content", article.Judul);
+      document.getElementById('twDesc').setAttribute("content", article.Meta_Desc);
+      document.getElementById('twImage').setAttribute("content", article.Gambar_URL);
+
+      var oldSchema = document.getElementById('dynamic-json-ld');
+      if (oldSchema) oldSchema.remove();
+      var scriptLD = document.createElement('script');
+      scriptLD.type = 'application/ld+json';
+      scriptLD.id = 'dynamic-json-ld';
+      scriptLD.text = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": currentUrl },
+        "headline": String(article.Judul),
+        "image": [ String(article.Gambar_URL) ],
+        "datePublished": String(article.Tgl_Rilis),
+        "author": [{ "@type": "Person", "name": String(article.Penulis) }]
+      });
+      document.head.appendChild(scriptLD);
+    }
+
+    function closeModal(skipPushState = false) {
+      var modal = document.getElementById('articleModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      appState.currentViewId = null;
+
+      if (!skipPushState) {
+        window.history.pushState(null, '', window.location.pathname);
+      }
+
+      // Revert Meta SEO to Default Axa Xyz
+      document.title = "Axa Xyz E-Zine | Portal Berita Internal";
+      document.querySelector('meta[name="description"]').setAttribute("content", "Portal berita kampus dan korporat internal terbaru.");
+      document.getElementById('canonicalUrl').setAttribute("href", "https://axaartikel.vercel.app/");
+      document.getElementById('ogImage').setAttribute("content", "https://axaartikel.vercel.app/axalogo.png");
+      document.getElementById('twImage').setAttribute("content", "https://axaartikel.vercel.app/axalogo.png");
+    }
+
+    function closeModalAndGoHome() {
+      closeModal();
+      scrollToTop();
+    }
+
+    function likeArticle() {
+      var id = appState.currentViewId;
+      var article = appState.articles.find(function(a) { return a.ID_Berita === id; });
+      if (!article) return;
+      var iconLike = document.getElementById('iconLike');
+      if (iconLike.classList.contains('ph-fill')) return; 
+
+      iconLike.classList.remove('ph-heart');
+      iconLike.classList.add('ph-fill', 'text-red-500');
+      article.Jumlah_Like = (parseInt(article.Jumlah_Like) || 0) + 1;
+      document.getElementById('txtLikeCount').innerText = article.Jumlah_Like;
+
+      // SYNC BACKEND LIKE VIA FETCH API
+      fetch(GAS_URL + "?action=incrementLike&id=" + id, { method: 'POST', mode: 'no-cors' })
+        .catch(function(e){ console.log(e); });
+    }
+
+    function shareArticle() {
+      var dummy = document.createElement('input');
+      document.body.appendChild(dummy);
+      dummy.value = window.location.href; 
+      dummy.select();
+      document.execCommand('copy');
+      document.body.removeChild(dummy);
+      alert("Tautan artikel berhasil disalin: \n" + dummy.value);
+    }
+  </script>
+</body>
+</html>
