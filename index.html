@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#00ffaa">
   
+  <!-- GOOGLE SEARCH CONSOLE VERIFICATION (100% VALID) -->
+  <meta name="google-site-verification" content="cbSE7olGd0ibEx_bhjC3aitjIovXCSwUKYbVOh7nbLs" />
+
   <!-- DYNAMIC SEO & CANONICAL (UPGRADE URL) -->
   <title>Axa Xyz E-Zine | Portal Berita Internal</title>
   <meta name="description" content="Portal berita kampus dan korporat internal terbaru. Informasi inovasi, teknologi, dan event terkini.">
@@ -209,10 +212,11 @@
     <!-- Filter -->
     <div class="flex flex-wrap gap-3 mb-8" id="categoryContainer">
       <button class="badge-category active" onclick="filterCategory('All', this)">Semua</button>
-      <button class="badge-category" onclick="filterCategory('Teknologi', this)">Teknologi</button>
+      <button class="badge-category" onclick="filterCategory('Sosial', this)">Sosial</button>
       <button class="badge-category" onclick="filterCategory('Edukasi', this)">Edukasi</button>
+      <button class="badge-category" onclick="filterCategory('Olahraga', this)">Olahraga</button>
       <button class="badge-category" onclick="filterCategory('Event', this)">Event</button>
-      <button class="badge-category" onclick="filterCategory('Bisnis', this)">Bisnis</button>
+      <button class="badge-category" onclick="filterCategory('Prestasi', this)">Prestasi</button>
     </div>
 
     <!-- Grid -->
@@ -260,9 +264,10 @@
       initialLoadDone: false 
     };
 
+    // --- MOCK DATA (SUDAH DIUPGRADE KE BEM FKG UMI THEME JIKA GAS ERROR/LOADING LAMA) ---
     var mockData = [
-      { ID_Berita: "B1", Slug_URL: "inovasi-ai-kampus", Judul: "Inovasi AI di Lingkungan Kampus", Kategori: "Teknologi", Penulis: "Alan Turing", Gambar_URL: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800", Konten_HTML: "<p>AI kini menjadi asisten utama mahasiswa dalam menyusun riset...</p>", Tgl_Rilis: "2026-07-20", Waktu_Baca: "3 min read", Jumlah_View: "150", Jumlah_Like: "20", Meta_Desc: "AI di kampus." },
-      { ID_Berita: "B2", Slug_URL: "juara-robotik-nasional", Judul: "Tim Robotik Sabet Juara 1", Kategori: "Teknologi", Penulis: "Siti", Gambar_URL: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800", Konten_HTML: "<p>Kemenangan gemilang dari tim robotik kampus...</p>", Tgl_Rilis: "2026-07-19", Waktu_Baca: "2 min read", Jumlah_View: "80", Jumlah_Like: "12", Meta_Desc: "Juara robotik." }
+      { ID_Berita: "BEMFKG-01", Slug_URL: "baksos-senyum-sehat", Judul: "Baksos 'Senyum Sehat' BEM FKG UMI di Pelosok Desa", Kategori: "Sosial", Penulis: "Divisi Pengabdian", Gambar_URL: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800", Konten_HTML: "<p>Kegiatan bakti sosial ini dihadiri oleh ratusan warga desa yang antusias memeriksakan kesehatan gigi dan mulut mereka. Pelayanan yang diberikan meliputi cabut gigi, tambal gigi, dan pembersihan karang gigi.</p>", Tgl_Rilis: "2026-07-20", Waktu_Baca: "3 min read", Jumlah_View: "150", Jumlah_Like: "20", Meta_Desc: "BEM FKG UMI sukses menggelar bakti sosial pemeriksaan gigi gratis..." },
+      { ID_Berita: "BEMFKG-02", Slug_URL: "seminar-nasional-fkg", Judul: "Seminar Nasional: Tantangan Kedokteran Gigi Era Digital", Kategori: "Edukasi", Penulis: "Divisi Keilmuan", Gambar_URL: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800", Konten_HTML: "<p>Seminar ini membahas penggunaan Artificial Intelligence (AI) dan teknologi 3D printing dalam pembuatan prostetik gigi di masa depan.</p>", Tgl_Rilis: "2026-07-18", Waktu_Baca: "2 min read", Jumlah_View: "80", Jumlah_Like: "12", Meta_Desc: "Menghadirkan pakar kedokteran gigi nasional..." }
     ];
 
     window.onload = function() {
