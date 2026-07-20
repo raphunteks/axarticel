@@ -1,8 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+            
+  <!-- 1. Halaman Beranda (Prioritas Tertinggi) -->
   <url>
     <loc>https://axaartikel.vercel.app/</loc>
+    <lastmod>2026-07-20T08:00:00+00:00</lastmod>
     <changefreq>always</changefreq>
-    <priority>1.0</priority>
+    <priority>1.00</priority>
   </url>
+
+  <!-- 2. Halaman Artikel BEM FKG UMI (Sesuai Data Mock/GAS) -->
+  <url>
+    <loc>https://axaartikel.vercel.app/?article=baksos-senyum-sehat</loc>
+    <lastmod>2026-07-20T08:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>
+  
+  <url>
+    <loc>https://axaartikel.vercel.app/?article=seminar-nasional-fkg</loc>
+    <lastmod>2026-07-18T10:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://axaartikel.vercel.app/?article=liga-futsal-fkg-umi</loc>
+    <lastmod>2026-07-15T15:30:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://axaartikel.vercel.app/?article=penyuluhan-sd-gigi-kuat</loc>
+    <lastmod>2026-07-12T09:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://axaartikel.vercel.app/?article=pemilihan-presbem-baru</loc>
+    <lastmod>2026-07-10T13:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://axaartikel.vercel.app/?article=kunjungan-panti-asuhan</loc>
+    <lastmod>2026-07-08T16:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://axaartikel.vercel.app/?article=latihan-dasar-kepemimpinan</loc>
+    <lastmod>2026-07-05T08:30:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://axaartikel.vercel.app/?article=prestasi-mahasiswa-fkg</loc>
+    <lastmod>2026-07-01T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://axaartikel.vercel.app/?article=raker-bem-fkg</loc>
+    <lastmod>2026-06-28T09:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://axaartikel.vercel.app/?article=donor-darah-fkg</loc>
+    <lastmod>2026-06-25T08:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
 </urlset>
