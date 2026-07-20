@@ -8,28 +8,37 @@
   <!-- PERFORMANCE PRECONNECTS (100% Best Practice) -->
   <link rel="preconnect" href="https://script.google.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="dns-prefetch" href="https://script.google.com">
 
   <!-- GOOGLE SEARCH CONSOLE VERIFICATION (100% VALID) -->
   <meta name="google-site-verification" content="cbSE7olGd0ibEx_bhjC3aitjIovXCSwUKYbVOh7nbLs" />
 
-  <!-- DYNAMIC SEO & CANONICAL -->
+  <!-- ENTERPRISE SEO DIRECTIVES & CANONICAL -->
   <title>Axa Xyz E-Zine | Portal Berita Internal</title>
   <meta name="description" content="Portal berita kampus dan korporat internal terbaru. Informasi inovasi, teknologi, dan event terkini.">
-  <meta name="keywords" content="portal berita, ezine, axa xyz, kampus, korporat, artikel seo">
+  <meta name="keywords" content="portal berita, ezine, axa xyz, kampus, korporat, artikel seo, bem fkg umi">
   <meta name="author" content="Axa Xyz">
+  <!-- Wajib agar artikel bisa masuk Google Discover dengan gambar besar -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" id="canonicalUrl" href="https://axaartikel.vercel.app/">
 
-  <!-- FAVICON -->
+  <!-- MOBILE WEB APP & FAVICON OPTIMIZATION -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Axa Xyz">
+  <meta name="application-name" content="Axa Xyz">
   <link rel="icon" type="image/png" href="/axalogo.png">
   <link rel="apple-touch-icon" href="/axalogo.png">
   <link rel="shortcut icon" href="/axalogo.png">
 
   <!-- OPEN GRAPH (FACEBOOK/LINKEDIN/WA) -->
+  <meta property="og:site_name" content="Axa Xyz E-Zine">
   <meta property="og:title" id="ogTitle" content="Axa Xyz E-Zine | Portal Berita Internal">
   <meta property="og:description" id="ogDesc" content="Portal berita kampus dan korporat internal terbaru.">
   <meta property="og:type" content="website">
   <meta property="og:url" id="ogUrl" content="https://axaartikel.vercel.app/">
   <meta property="og:image" id="ogImage" content="https://axaartikel.vercel.app/axalogo.png">
+  <meta property="og:locale" content="id_ID">
 
   <!-- TWITTER CARDS -->
   <meta name="twitter:card" content="summary_large_image">
@@ -41,19 +50,28 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-  <!-- Sitelinks Search Box Schema -->
+  <!-- ENTERPRISE STRUCTURED DATA (WebSite + Organization) -->
   <script type="application/ld+json" id="website-schema">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Axa Xyz E-Zine",
-      "url": "https://axaartikel.vercel.app/",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://axaartikel.vercel.app/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Axa Xyz E-Zine",
+        "url": "https://axaartikel.vercel.app/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://axaartikel.vercel.app/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Axa Xyz",
+        "url": "https://axaartikel.vercel.app/",
+        "logo": "https://axaartikel.vercel.app/axalogo.png"
       }
-    }
+    ]
   </script>
 
   <style>
@@ -74,15 +92,16 @@
       overflow-x: hidden;
     }
 
-    /* Accessibility Focus States */
+    /* Accessibility Focus States (WCAG 2.1 AA) */
     :focus-visible {
-      outline: 2px solid var(--neon-green);
+      outline: 3px solid var(--neon-green);
       outline-offset: 2px;
+      border-radius: 4px;
     }
 
     /* CSS3 Glassmorphism Header */
     .glass-header {
-      background: rgba(11, 15, 25, 0.7);
+      background: rgba(11, 15, 25, 0.85);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(0, 255, 170, 0.15);
@@ -91,7 +110,7 @@
 
     /* Glowing Text Effect */
     .glow-text {
-      text-shadow: 0 0 10px var(--neon-glow);
+      text-shadow: 0 0 12px var(--neon-glow);
     }
 
     /* Asymmetrical Grid */
@@ -117,6 +136,7 @@
       display: flex;
       flex-direction: column;
       text-decoration: none; /* Penting untuk tag <a> */
+      content-visibility: auto; /* Performa render modern */
     }
     .zine-card:hover, .zine-card:focus-visible {
       transform: translateY(-5px);
@@ -127,8 +147,7 @@
     .card-img {
       width: 100%; height: 220px; object-fit: cover;
       transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
-      /* Fix for CLS */
-      background-color: #1f2937;
+      background-color: #1f2937; /* Placeholder CLS Guard */
     }
     .zine-card:hover .card-img { transform: scale(1.1); filter: brightness(1.1); }
 
@@ -159,7 +178,7 @@
     /* Modal Article (Smooth Transition & A11y) */
     .modal-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(11, 15, 25, 0.8);
+      background: rgba(11, 15, 25, 0.85);
       backdrop-filter: blur(10px);
       z-index: 50; display: none; opacity: 0;
       transition: opacity 0.4s ease;
@@ -240,26 +259,30 @@
 </head>
 <body>
 
+  <!-- ENTERPRISE A11Y: Skip to Content Link -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-[#00ffaa] focus:text-black focus:font-bold focus:rounded-br-lg outline-none ring-2 ring-black">Langsung ke konten utama</a>
+
   <!-- Header (Semantic HTML5) -->
   <header class="glass-header sticky top-0 z-40 py-4 px-6 flex justify-between items-center" role="banner">
-    <!-- Diubah menjadi tag <a> untuk Home SEO & A11y -->
-    <a href="/" class="flex items-center gap-3 cursor-pointer rounded-lg p-1" onclick="closeModalAndGoHome(event)" aria-label="Kembali ke Beranda Axa Xyz">
+    <a href="/" class="flex items-center gap-3 cursor-pointer rounded-lg p-1 outline-none" onclick="closeModalAndGoHome(event)" aria-label="Beranda Axa Xyz">
       <img src="/axalogo.png" alt="Logo Axa Xyz" width="32" height="32" class="w-8 h-8 object-contain drop-shadow-[0_0_8px_rgba(0,255,170,0.5)]" onerror="this.style.display='none'; document.getElementById('altIcon').style.display='block';">
       <i id="altIcon" class="ph ph-hexagon text-3xl text-[#00ffaa]" style="display:none;" aria-hidden="true"></i>
       <div class="text-xl font-bold tracking-tight glow-text translate-y-[2px]">Axa <span class="text-[#00ffaa]">Xyz</span></div>
     </a>
     
     <div class="relative hidden md:block w-64">
-      <label for="searchInput" class="sr-only">Cari artikel</label>
+      <label for="searchInput" class="sr-only">Cari artikel berdasar judul</label>
       <i class="ph ph-magnifying-glass absolute left-3 top-3 text-gray-400" aria-hidden="true"></i>
-      <input type="search" id="searchInput" placeholder="Cari artikel..." aria-label="Cari artikel dari judul"
+      <input type="search" id="searchInput" placeholder="Cari artikel..." aria-label="Cari artikel"
              class="w-full bg-[#151b26] border border-gray-700 rounded-full py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-[#00ffaa] focus:ring-1 focus:ring-[#00ffaa] transition">
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8" role="main">
-    <!-- Filter Navigation (Aksesibilitas Ditingkatkan) -->
-    <nav aria-label="Kategori Artikel" class="flex flex-wrap gap-3 mb-8" id="categoryContainer">
+  <!-- Main Content (Ditandai ID untuk aksesibilitas Skip Link) -->
+  <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 py-8" role="main">
+    
+    <!-- Filter Navigation -->
+    <nav aria-label="Filter Kategori" class="flex flex-wrap gap-3 mb-8" id="categoryContainer">
       <button class="badge-category active" aria-pressed="true" onclick="filterCategory('All', this)">Semua</button>
       <button class="badge-category" aria-pressed="false" onclick="filterCategory('Sosial', this)">Sosial</button>
       <button class="badge-category" aria-pressed="false" onclick="filterCategory('Edukasi', this)">Edukasi</button>
@@ -278,7 +301,7 @@
   <!-- Modal View (100% Aksesibilitas Valid & Breadcrumbs) -->
   <div id="articleModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
     <article class="modal-content relative pb-8">
-      <button id="closeModalBtn" onclick="closeModalAndGoHome(event)" class="absolute top-4 right-4 bg-black/60 p-3 rounded-full text-white hover:bg-[#00ffaa] hover:text-black transition z-10 backdrop-blur-sm focus-visible" aria-label="Tutup Artikel">
+      <button id="closeModalBtn" onclick="closeModalAndGoHome(event)" class="absolute top-4 right-4 bg-black/60 p-3 rounded-full text-white hover:bg-[#00ffaa] hover:text-black transition z-10 backdrop-blur-sm outline-none" aria-label="Tutup Artikel">
         <i class="ph ph-x text-xl" aria-hidden="true"></i>
       </button>
       
@@ -298,11 +321,11 @@
         <h1 id="modalTitle" class="text-3xl md:text-4xl font-bold mb-6 text-white leading-tight"></h1>
         
         <div class="flex gap-4 mb-8 border-b border-gray-800 pb-4">
-          <button id="btnLike" onclick="likeArticle()" class="flex items-center gap-2 text-gray-400 hover:text-[#00ffaa] transition p-2 -ml-2 rounded-lg" aria-label="Sukai artikel ini">
+          <button id="btnLike" onclick="likeArticle()" class="flex items-center gap-2 text-gray-400 hover:text-[#00ffaa] transition p-2 -ml-2 rounded-lg outline-none" aria-label="Sukai artikel ini">
             <i class="ph ph-heart text-xl" id="iconLike" aria-hidden="true"></i>
             <span id="txtLikeCount">0</span>
           </button>
-          <button onclick="shareArticle()" class="flex items-center gap-2 text-gray-400 hover:text-[#00ffaa] transition p-2 rounded-lg" aria-label="Bagikan tautan artikel">
+          <button onclick="shareArticle()" class="flex items-center gap-2 text-gray-400 hover:text-[#00ffaa] transition p-2 rounded-lg outline-none" aria-label="Bagikan tautan artikel">
             <i class="ph ph-share-network text-xl" aria-hidden="true"></i> Bagikan
           </button>
         </div>
@@ -341,7 +364,6 @@
       setupKeyboardAccessibility();
     };
 
-    // Keyboard A11y (Tutup Modal dengan ESC)
     function setupKeyboardAccessibility() {
       document.addEventListener('keydown', function(event) {
         if (event.key === "Escape" && document.getElementById('articleModal').classList.contains('active')) {
@@ -413,10 +435,14 @@
       }
     }
 
-    // --- SUPER BIG UPGRADE: LAZY LOAD IMAGES & <A HREF> CRAWLER FRIENDLY ---
+    // --- EXPERT PERFORMANCE UPGRADE: LCP / EAGER LOADING UNTUK GAMBAR PERTAMA ---
     function renderArticles(data) {
       var grid = document.getElementById('articleGrid');
       var html = "";
+      
+      // Deteksi jika ini adalah rendering halaman pertama (index = 0)
+      var currentOffset = appState.articles.length - data.length;
+
       for (var i = 0; i < data.length; i++) {
         var item = data[i];
         var id = String(item.ID_Berita);
@@ -426,10 +452,14 @@
         var title = String(item.Judul);
         var seoUrl = "?article=" + slug;
         
-        // Atribut loading="lazy" (Performa 100%) dan tag <a> murni
-        html += '<a href="' + seoUrl + '" class="zine-card cursor-pointer group" aria-label="Baca artikel: ' + title + '" onclick="openModal(event, \'' + id + '\')">';
+        // Logika LCP (Largest Contentful Paint) 100% Core Web Vitals
+        // Gambar pertama (Hero) dimuat seketika, gambar lainnya malas (lazy).
+        var isHero = (currentOffset === 0 && i === 0);
+        var loadingAttr = isHero ? 'loading="eager" fetchpriority="high"' : 'loading="lazy" decoding="async"';
+        
+        html += '<a href="' + seoUrl + '" class="zine-card cursor-pointer group outline-none" aria-label="Baca artikel: ' + title + '" onclick="openModal(event, \'' + id + '\')">';
         html +=   '<div class="img-wrapper">';
-        html +=     '<img src="' + img + '" loading="lazy" width="400" height="220" class="card-img" alt="Thumbnail ' + title + '">';
+        html +=     '<img src="' + img + '" ' + loadingAttr + ' width="400" height="220" class="card-img" alt="Thumbnail ' + title + '">';
         html +=     '<div class="absolute top-3 left-3 bg-[#0b0f19]/80 text-[#00ffaa] text-xs px-3 py-1 rounded-full border border-[#00ffaa]/30 backdrop-blur-sm uppercase font-bold tracking-wider">' + cat + '</div>';
         html +=   '</div>';
         html +=   '<div class="p-5 flex-1 flex flex-col justify-between">';
@@ -488,9 +518,9 @@
       }
 
       // Visual Breadcrumb Injection
-      var breadcrumbHtml = '<a href="/" onclick="closeModalAndGoHome(event)">Beranda</a> <span class="separator">/</span> ';
+      var breadcrumbHtml = '<a href="/" onclick="closeModalAndGoHome(event)" class="outline-none focus-visible:ring-1">Beranda</a> <span class="separator">/</span> ';
       breadcrumbHtml += '<span class="text-gray-400 cursor-default">' + article.Kategori + '</span> <span class="separator">/</span> ';
-      breadcrumbHtml += '<span class="text-gray-200 cursor-default truncate block sm:inline max-w-[200px] sm:max-w-xs align-bottom">' + article.Judul + '</span>';
+      breadcrumbHtml += '<span class="text-gray-200 cursor-default truncate block sm:inline max-w-[200px] sm:max-w-xs align-bottom" aria-current="page">' + article.Judul + '</span>';
       document.getElementById('modalBreadcrumb').innerHTML = breadcrumbHtml;
 
       document.getElementById('modalImgWrapper').innerHTML = '<img src="' + article.Gambar_URL + '" alt="' + article.Judul + '" class="w-full h-full object-cover opacity-50 mix-blend-screen"><div class="absolute inset-0 bg-gradient-to-t from-[#151b26] via-[#151b26]/50 to-transparent"></div>';
@@ -543,6 +573,7 @@
           "description": String(article.Meta_Desc),
           "image": [ String(article.Gambar_URL) ],
           "datePublished": String(article.Tgl_Rilis),
+          "dateModified": String(article.Tgl_Rilis),
           "author": [{ "@type": "Person", "name": String(article.Penulis) }],
           "publisher": {
             "@type": "Organization",
