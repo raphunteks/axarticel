@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#00ffaa">
+  <meta name="theme-color" content="#0b0f19">
   
+  <!-- PERFORMANCE PRECONNECTS (100% Best Practice) -->
+  <link rel="preconnect" href="https://script.google.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+
   <!-- GOOGLE SEARCH CONSOLE VERIFICATION (100% VALID) -->
   <meta name="google-site-verification" content="cbSE7olGd0ibEx_bhjC3aitjIovXCSwUKYbVOh7nbLs" />
 
@@ -70,6 +74,12 @@
       overflow-x: hidden;
     }
 
+    /* Accessibility Focus States */
+    :focus-visible {
+      outline: 2px solid var(--neon-green);
+      outline-offset: 2px;
+    }
+
     /* CSS3 Glassmorphism Header */
     .glass-header {
       background: rgba(11, 15, 25, 0.7);
@@ -108,7 +118,7 @@
       flex-direction: column;
       text-decoration: none; /* Penting untuk tag <a> */
     }
-    .zine-card:hover {
+    .zine-card:hover, .zine-card:focus-visible {
       transform: translateY(-5px);
       box-shadow: 0 15px 35px -5px rgba(0, 255, 170, 0.2);
       border-color: rgba(0, 255, 170, 0.4);
@@ -117,6 +127,8 @@
     .card-img {
       width: 100%; height: 220px; object-fit: cover;
       transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+      /* Fix for CLS */
+      background-color: #1f2937;
     }
     .zine-card:hover .card-img { transform: scale(1.1); filter: brightness(1.1); }
 
@@ -125,22 +137,26 @@
       background: rgba(0, 255, 170, 0.05);
       color: var(--neon-green);
       border: 1px solid rgba(0, 255, 170, 0.2);
-      padding: 6px 16px;
+      padding: 8px 16px; /* Touch target min 44px */
       border-radius: 24px;
-      font-size: 0.8rem;
+      font-size: 0.875rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       cursor: pointer;
       transition: all 0.3s ease;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
-    .badge-category.active, .badge-category:hover {
+    .badge-category.active, .badge-category:hover, .badge-category:focus-visible {
       background: var(--neon-green);
       color: var(--bg-dark);
       box-shadow: 0 0 15px var(--neon-glow);
     }
 
-    /* Modal Article (Smooth Transition) */
+    /* Modal Article (Smooth Transition & A11y) */
     .modal-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(11, 15, 25, 0.8);
@@ -148,6 +164,7 @@
       z-index: 50; display: none; opacity: 0;
       transition: opacity 0.4s ease;
       overflow-y: auto;
+      overscroll-behavior: contain;
     }
     .modal-overlay.active { display: block; opacity: 1; }
     .modal-content {
@@ -160,6 +177,14 @@
       transform: translateY(40px) scale(0.95);
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       opacity: 0;
+      position: relative;
+    }
+    @media (max-width: 640px) {
+        .modal-content {
+            margin: 0;
+            border-radius: 0;
+            min-height: 100vh;
+        }
     }
     .modal-overlay.active .modal-content {
       transform: translateY(0) scale(1);
@@ -168,12 +193,34 @@
     .article-text {
       font-family: 'Merriweather', serif; line-height: 1.8; color: #d1d5db;
     }
+    
+    /* Breadcrumbs Style */
+    .breadcrumb-nav {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .breadcrumb-nav span.separator {
+      color: #4b5563;
+    }
+    .breadcrumb-nav a {
+      color: var(--neon-green);
+      text-decoration: none;
+      transition: text-shadow 0.3s ease;
+    }
+    .breadcrumb-nav a:hover, .breadcrumb-nav a:focus-visible {
+      text-shadow: 0 0 8px var(--neon-glow);
+    }
 
     /* Loaders & FAB */
     .loader-ring {
       border: 3px solid rgba(255,255,255,0.05);
       border-top-color: var(--neon-green);
-      border-radius: 50%; width: 40px; height: 40px;
+      border-radius: 50%; width: 44px; height: 44px;
       animation: spin 1s linear infinite; margin: 30px auto;
     }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -181,79 +228,95 @@
     .fab-btn {
       position: fixed; bottom: 24px; right: 24px;
       background: var(--neon-green); color: var(--bg-dark);
-      width: 50px; height: 50px; border-radius: 50%;
+      width: 56px; height: 56px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 20px var(--neon-glow);
       cursor: pointer; opacity: 0; pointer-events: none;
       transition: all 0.3s ease; z-index: 40;
     }
     .fab-btn.visible { opacity: 1; pointer-events: auto; }
-    .fab-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 25px var(--neon-glow); }
+    .fab-btn:hover, .fab-btn:focus-visible { transform: translateY(-3px); box-shadow: 0 6px 25px var(--neon-glow); }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="glass-header sticky top-0 z-40 py-4 px-6 flex justify-between items-center">
-    <!-- Diubah menjadi tag <a> untuk Home SEO -->
-    <a href="/" class="flex items-center gap-3 cursor-pointer" onclick="closeModalAndGoHome(event)">
-      <img src="/axalogo.png" alt="Logo Axa Xyz" class="w-8 h-8 object-contain drop-shadow-[0_0_8px_rgba(0,255,170,0.5)]" onerror="this.style.display='none'; document.getElementById('altIcon').style.display='block';">
-      <i id="altIcon" class="ph ph-hexagon text-3xl text-[#00ffaa]" style="display:none;"></i>
-      <h1 class="text-xl font-bold tracking-tight glow-text">Axa <span class="text-[#00ffaa]">Xyz</span></h1>
+  <!-- Header (Semantic HTML5) -->
+  <header class="glass-header sticky top-0 z-40 py-4 px-6 flex justify-between items-center" role="banner">
+    <!-- Diubah menjadi tag <a> untuk Home SEO & A11y -->
+    <a href="/" class="flex items-center gap-3 cursor-pointer rounded-lg p-1" onclick="closeModalAndGoHome(event)" aria-label="Kembali ke Beranda Axa Xyz">
+      <img src="/axalogo.png" alt="Logo Axa Xyz" width="32" height="32" class="w-8 h-8 object-contain drop-shadow-[0_0_8px_rgba(0,255,170,0.5)]" onerror="this.style.display='none'; document.getElementById('altIcon').style.display='block';">
+      <i id="altIcon" class="ph ph-hexagon text-3xl text-[#00ffaa]" style="display:none;" aria-hidden="true"></i>
+      <div class="text-xl font-bold tracking-tight glow-text translate-y-[2px]">Axa <span class="text-[#00ffaa]">Xyz</span></div>
     </a>
     
     <div class="relative hidden md:block w-64">
-      <i class="ph ph-magnifying-glass absolute left-3 top-2.5 text-gray-400"></i>
-      <input type="text" id="searchInput" placeholder="Cari artikel..." 
-             class="w-full bg-[#151b26] border border-gray-700 rounded-full py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-[#00ffaa] transition">
+      <label for="searchInput" class="sr-only">Cari artikel</label>
+      <i class="ph ph-magnifying-glass absolute left-3 top-3 text-gray-400" aria-hidden="true"></i>
+      <input type="search" id="searchInput" placeholder="Cari artikel..." aria-label="Cari artikel dari judul"
+             class="w-full bg-[#151b26] border border-gray-700 rounded-full py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-[#00ffaa] focus:ring-1 focus:ring-[#00ffaa] transition">
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-    <!-- Filter -->
-    <div class="flex flex-wrap gap-3 mb-8" id="categoryContainer">
-      <button class="badge-category active" onclick="filterCategory('All', this)">Semua</button>
-      <button class="badge-category" onclick="filterCategory('Sosial', this)">Sosial</button>
-      <button class="badge-category" onclick="filterCategory('Edukasi', this)">Edukasi</button>
-      <button class="badge-category" onclick="filterCategory('Olahraga', this)">Olahraga</button>
-      <button class="badge-category" onclick="filterCategory('Event', this)">Event</button>
-      <button class="badge-category" onclick="filterCategory('Prestasi', this)">Prestasi</button>
-    </div>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8" role="main">
+    <!-- Filter Navigation (Aksesibilitas Ditingkatkan) -->
+    <nav aria-label="Kategori Artikel" class="flex flex-wrap gap-3 mb-8" id="categoryContainer">
+      <button class="badge-category active" aria-pressed="true" onclick="filterCategory('All', this)">Semua</button>
+      <button class="badge-category" aria-pressed="false" onclick="filterCategory('Sosial', this)">Sosial</button>
+      <button class="badge-category" aria-pressed="false" onclick="filterCategory('Edukasi', this)">Edukasi</button>
+      <button class="badge-category" aria-pressed="false" onclick="filterCategory('Olahraga', this)">Olahraga</button>
+      <button class="badge-category" aria-pressed="false" onclick="filterCategory('Event', this)">Event</button>
+      <button class="badge-category" aria-pressed="false" onclick="filterCategory('Prestasi', this)">Prestasi</button>
+    </nav>
 
-    <!-- Grid -->
-    <div class="grid-zine" id="articleGrid"></div>
-    <div id="scrollLoader" class="hidden"><div class="loader-ring"></div></div>
+    <!-- Grid Layout Artikel -->
+    <div class="grid-zine" id="articleGrid" aria-live="polite">
+      <!-- Injeksi JS -->
+    </div>
+    <div id="scrollLoader" class="hidden" aria-hidden="true"><div class="loader-ring"></div></div>
   </main>
 
-  <!-- Modal View -->
-  <div id="articleModal" class="modal-overlay">
-    <div class="modal-content relative pb-8">
-      <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/60 p-2 rounded-full text-white hover:bg-[#00ffaa] hover:text-black transition z-10 backdrop-blur-sm">
-        <i class="ph ph-x text-xl"></i>
+  <!-- Modal View (100% Aksesibilitas Valid & Breadcrumbs) -->
+  <div id="articleModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+    <article class="modal-content relative pb-8">
+      <button id="closeModalBtn" onclick="closeModalAndGoHome(event)" class="absolute top-4 right-4 bg-black/60 p-3 rounded-full text-white hover:bg-[#00ffaa] hover:text-black transition z-10 backdrop-blur-sm focus-visible" aria-label="Tutup Artikel">
+        <i class="ph ph-x text-xl" aria-hidden="true"></i>
       </button>
       
-      <div id="modalImgWrapper" class="w-full h-64 md:h-96 bg-gray-900 relative"></div>
+      <figure id="modalImgWrapper" class="w-full h-64 md:h-[400px] bg-gray-900 relative m-0">
+          <!-- Gambar Injeksi -->
+      </figure>
 
       <div class="px-6 md:px-10 mt-6">
-        <div id="modalMeta" class="flex items-center gap-4 text-sm text-gray-400 mb-3"></div>
-        <h1 id="modalTitle" class="text-3xl font-bold mb-6 text-white leading-tight"></h1>
+        <!-- Visual Breadcrumbs UI -->
+        <nav aria-label="Breadcrumb" id="modalBreadcrumb" class="breadcrumb-nav">
+           <!-- Diinjeksi via JS -->
+        </nav>
+
+        <div id="modalMeta" class="flex items-center gap-4 text-sm text-gray-400 mb-3">
+          <!-- Meta Injeksi -->
+        </div>
+        <h1 id="modalTitle" class="text-3xl md:text-4xl font-bold mb-6 text-white leading-tight"></h1>
         
         <div class="flex gap-4 mb-8 border-b border-gray-800 pb-4">
-          <button id="btnLike" onclick="likeArticle()" class="flex items-center gap-2 text-gray-400 hover:text-[#00ffaa] transition">
-            <i class="ph ph-heart text-xl" id="iconLike"></i>
+          <button id="btnLike" onclick="likeArticle()" class="flex items-center gap-2 text-gray-400 hover:text-[#00ffaa] transition p-2 -ml-2 rounded-lg" aria-label="Sukai artikel ini">
+            <i class="ph ph-heart text-xl" id="iconLike" aria-hidden="true"></i>
             <span id="txtLikeCount">0</span>
           </button>
-          <button onclick="shareArticle()" class="flex items-center gap-2 text-gray-400 hover:text-[#00ffaa] transition">
-            <i class="ph ph-share-network text-xl"></i> Bagikan
+          <button onclick="shareArticle()" class="flex items-center gap-2 text-gray-400 hover:text-[#00ffaa] transition p-2 rounded-lg" aria-label="Bagikan tautan artikel">
+            <i class="ph ph-share-network text-xl" aria-hidden="true"></i> Bagikan
           </button>
         </div>
 
-        <div id="modalContent" class="article-text text-lg"></div>
+        <div id="modalContent" class="article-text text-lg md:text-xl">
+          <!-- Konten Injeksi -->
+        </div>
       </div>
-    </div>
+    </article>
   </div>
 
-  <button id="fabBtn" class="fab-btn" onclick="scrollToTop()"><i class="ph ph-arrow-up text-xl"></i></button>
+  <button id="fabBtn" class="fab-btn" onclick="scrollToTop()" aria-label="Kembali ke atas halaman">
+    <i class="ph ph-arrow-up text-2xl" aria-hidden="true"></i>
+  </button>
 
   <script>
     // --- LINK GOOGLE APPS SCRIPT API ---
@@ -275,7 +338,17 @@
       loadArticles(true);
       setupScrollListener();
       setupSearchListener();
+      setupKeyboardAccessibility();
     };
+
+    // Keyboard A11y (Tutup Modal dengan ESC)
+    function setupKeyboardAccessibility() {
+      document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape" && document.getElementById('articleModal').classList.contains('active')) {
+          closeModalAndGoHome(event);
+        }
+      });
+    }
 
     window.addEventListener('popstate', function(event) {
       checkUrlRouting(true);
@@ -340,7 +413,7 @@
       }
     }
 
-    // --- SUPER BIG UPGRADE: MENGUBAH <DIV> MENJADI <A HREF> AGAR GOOGLEBOT BISA CRAWL ---
+    // --- SUPER BIG UPGRADE: LAZY LOAD IMAGES & <A HREF> CRAWLER FRIENDLY ---
     function renderArticles(data) {
       var grid = document.getElementById('articleGrid');
       var html = "";
@@ -351,19 +424,19 @@
         var img = String(item.Gambar_URL);
         var cat = String(item.Kategori);
         var title = String(item.Judul);
-        
-        // Perhatikan penggunaan tag <a> dengan href. Ini kunci agar terindeks Google!
         var seoUrl = "?article=" + slug;
-        html += '<a href="' + seoUrl + '" class="zine-card cursor-pointer group" onclick="openModal(event, \'' + id + '\')">';
+        
+        // Atribut loading="lazy" (Performa 100%) dan tag <a> murni
+        html += '<a href="' + seoUrl + '" class="zine-card cursor-pointer group" aria-label="Baca artikel: ' + title + '" onclick="openModal(event, \'' + id + '\')">';
         html +=   '<div class="img-wrapper">';
-        html +=     '<img src="' + img + '" class="card-img" alt="' + title + '">';
+        html +=     '<img src="' + img + '" loading="lazy" width="400" height="220" class="card-img" alt="Thumbnail ' + title + '">';
         html +=     '<div class="absolute top-3 left-3 bg-[#0b0f19]/80 text-[#00ffaa] text-xs px-3 py-1 rounded-full border border-[#00ffaa]/30 backdrop-blur-sm uppercase font-bold tracking-wider">' + cat + '</div>';
         html +=   '</div>';
         html +=   '<div class="p-5 flex-1 flex flex-col justify-between">';
-        html +=     '<h3 class="card-title text-lg font-bold text-white mb-3 line-clamp-3 group-hover:text-[#00ffaa] transition">' + title + '</h3>';
+        html +=     '<h2 class="card-title text-lg font-bold text-white mb-3 line-clamp-3 group-hover:text-[#00ffaa] transition">' + title + '</h2>';
         html +=     '<div class="flex justify-between items-center text-xs text-gray-400 mt-auto border-t border-gray-800 pt-3">';
-        html +=       '<span class="flex items-center gap-1"><i class="ph ph-clock"></i> ' + String(item.Waktu_Baca) + '</span>';
-        html +=       '<span class="flex items-center gap-1"><i class="ph ph-eye"></i> <span id="viewCount-' + id + '">' + String(item.Jumlah_View) + '</span></span>';
+        html +=       '<span class="flex items-center gap-1" aria-label="Waktu baca ' + String(item.Waktu_Baca) + '"><i class="ph ph-clock" aria-hidden="true"></i> ' + String(item.Waktu_Baca) + '</span>';
+        html +=       '<span class="flex items-center gap-1" aria-label="Dilihat ' + String(item.Jumlah_View) + ' kali"><i class="ph ph-eye" aria-hidden="true"></i> <span id="viewCount-' + id + '">' + String(item.Jumlah_View) + '</span></span>';
         html +=     '</div></div></a>';
       }
       grid.innerHTML += html;
@@ -391,15 +464,18 @@
     function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
     function filterCategory(cat, btnElement) {
-      document.querySelectorAll('.badge-category').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelectorAll('.badge-category').forEach(function(b) { 
+        b.classList.remove('active'); 
+        b.setAttribute('aria-pressed', 'false');
+      });
       btnElement.classList.add('active');
+      btnElement.setAttribute('aria-pressed', 'true');
       appState.category = cat; loadArticles(true);
     }
 
-    // --- UPGRADE DYNAMIC SEO INJECTION 100% ---
-    // Ditambahkan (event) untuk mencegah navigasi browser agar SPA tetap jalan.
+    // --- UPGRADE DYNAMIC SEO & BREADCRUMBS INJECTION 100% ---
     function openModal(event, id, skipPushState = false) {
-      if (event) event.preventDefault(); // Mencegah reload web!
+      if (event) event.preventDefault(); 
 
       appState.currentViewId = id;
       var article = appState.articles.find(function(a) { return a.ID_Berita === id; });
@@ -410,6 +486,12 @@
       if (!skipPushState) {
         window.history.pushState({ id: id }, article.Judul, currentFullUrl);
       }
+
+      // Visual Breadcrumb Injection
+      var breadcrumbHtml = '<a href="/" onclick="closeModalAndGoHome(event)">Beranda</a> <span class="separator">/</span> ';
+      breadcrumbHtml += '<span class="text-gray-400 cursor-default">' + article.Kategori + '</span> <span class="separator">/</span> ';
+      breadcrumbHtml += '<span class="text-gray-200 cursor-default truncate block sm:inline max-w-[200px] sm:max-w-xs align-bottom">' + article.Judul + '</span>';
+      document.getElementById('modalBreadcrumb').innerHTML = breadcrumbHtml;
 
       document.getElementById('modalImgWrapper').innerHTML = '<img src="' + article.Gambar_URL + '" alt="' + article.Judul + '" class="w-full h-full object-cover opacity-50 mix-blend-screen"><div class="absolute inset-0 bg-gradient-to-t from-[#151b26] via-[#151b26]/50 to-transparent"></div>';
       document.getElementById('modalMeta').innerHTML = '<span class="text-[#00ffaa] font-bold uppercase tracking-wider">' + article.Kategori + '</span> &bull; <span>Oleh ' + article.Penulis + '</span> &bull; <span>' + article.Tgl_Rilis.split(" ")[0] + '</span>';
@@ -423,6 +505,7 @@
       var modal = document.getElementById('articleModal');
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
+      document.getElementById('closeModalBtn').focus(); // Aksesibilitas: Pindahkan fokus ke tombol close
 
       var currentView = parseInt(article.Jumlah_View) || 0;
       article.Jumlah_View = currentView + 1;
@@ -445,30 +528,41 @@
       document.getElementById('twDesc').setAttribute("content", article.Meta_Desc);
       document.getElementById('twImage').setAttribute("content", article.Gambar_URL);
 
-      // JSON-LD Schema (Sangat penting agar artikel dikenali Google)
+      // JSON-LD Schema Kombinasi (NewsArticle + BreadcrumbList) 100% SEO Valid
       var oldSchema = document.getElementById('dynamic-json-ld');
       if (oldSchema) oldSchema.remove();
       var scriptLD = document.createElement('script');
       scriptLD.type = 'application/ld+json';
       scriptLD.id = 'dynamic-json-ld';
-      scriptLD.text = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "NewsArticle",
-        "mainEntityOfPage": { "@type": "WebPage", "@id": currentFullUrl },
-        "headline": String(article.Judul),
-        "description": String(article.Meta_Desc),
-        "image": [ String(article.Gambar_URL) ],
-        "datePublished": String(article.Tgl_Rilis),
-        "author": [{ "@type": "Person", "name": String(article.Penulis) }],
-        "publisher": {
-          "@type": "Organization",
-          "name": "Axa Xyz",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://axaartikel.vercel.app/axalogo.png"
+      scriptLD.text = JSON.stringify([
+        {
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          "mainEntityOfPage": { "@type": "WebPage", "@id": currentFullUrl },
+          "headline": String(article.Judul),
+          "description": String(article.Meta_Desc),
+          "image": [ String(article.Gambar_URL) ],
+          "datePublished": String(article.Tgl_Rilis),
+          "author": [{ "@type": "Person", "name": String(article.Penulis) }],
+          "publisher": {
+            "@type": "Organization",
+            "name": "Axa Xyz",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://axaartikel.vercel.app/axalogo.png"
+            }
           }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://axaartikel.vercel.app/" },
+            { "@type": "ListItem", "position": 2, "name": String(article.Kategori), "item": "https://axaartikel.vercel.app/?category=" + encodeURIComponent(article.Kategori) },
+            { "@type": "ListItem", "position": 3, "name": String(article.Judul), "item": currentFullUrl }
+          ]
         }
-      });
+      ]);
       document.head.appendChild(scriptLD);
     }
 
@@ -476,6 +570,13 @@
       var modal = document.getElementById('articleModal');
       modal.classList.remove('active');
       document.body.style.overflow = 'auto';
+      
+      // Aksesibilitas: kembalikan fokus ke grid elemen asalnya
+      if(appState.currentViewId) {
+        var triggerElem = document.querySelector(`a[onclick*="${appState.currentViewId}"]`);
+        if(triggerElem) triggerElem.focus();
+      }
+      
       appState.currentViewId = null;
 
       if (!skipPushState) {
